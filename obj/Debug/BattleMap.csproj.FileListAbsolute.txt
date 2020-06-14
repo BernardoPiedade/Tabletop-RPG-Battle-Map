@@ -1,0 +1,15 @@
+C:\Users\berni\OneDrive\Desktop\BattleMap\obj\Debug\BattleMap.csprojAssemblyReference.cache
+C:\Users\berni\OneDrive\Desktop\BattleMap\obj\Debug\MainWindow.g.cs
+C:\Users\berni\OneDrive\Desktop\BattleMap\obj\Debug\App.g.cs
+C:\Users\berni\OneDrive\Desktop\BattleMap\obj\Debug\BattleMap_MarkupCompile.cache
+C:\Users\berni\OneDrive\Desktop\BattleMap\obj\Debug\BattleMap_MarkupCompile.lref
+C:\Users\berni\OneDrive\Desktop\BattleMap\bin\Debug\BattleMap.exe.config
+C:\Users\berni\OneDrive\Desktop\BattleMap\bin\Debug\BattleMap.exe
+C:\Users\berni\OneDrive\Desktop\BattleMap\bin\Debug\BattleMap.pdb
+C:\Users\berni\OneDrive\Desktop\BattleMap\obj\Debug\MainWindow.baml
+C:\Users\berni\OneDrive\Desktop\BattleMap\obj\Debug\BattleMap.g.resources
+C:\Users\berni\OneDrive\Desktop\BattleMap\obj\Debug\BattleMap.Properties.Resources.resources
+C:\Users\berni\OneDrive\Desktop\BattleMap\obj\Debug\BattleMap.csproj.GenerateResource.cache
+C:\Users\berni\OneDrive\Desktop\BattleMap\obj\Debug\BattleMap.csproj.CoreCompileInputs.cache
+C:\Users\berni\OneDrive\Desktop\BattleMap\obj\Debug\BattleMap.exe
+C:\Users\berni\OneDrive\Desktop\BattleMap\obj\Debug\BattleMap.pdb
