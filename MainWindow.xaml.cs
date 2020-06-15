@@ -26,37 +26,43 @@ namespace BattleMap
         int last_Monster_Position_X;
         int last_Monster_Position_Y;
         int monster_Speed;
+        Rectangle last_Monster_Rect;
 
-        public Monster_Token()
+        public Monster_Token(Rectangle last_Monster_Rect = null)
         {
             last_Monster_Position_X = 0;
             last_Monster_Position_Y = 0;
             monster_Speed = 0;
+            this.Last_Monster_Rect = last_Monster_Rect;
         }
 
-        public Monster_Token(Monster_Token m)
+        public Monster_Token(Monster_Token m, Rectangle last_Monster_Rect = null)
         {
             last_Monster_Position_X = m.last_Monster_Position_X;
             last_Monster_Position_Y = m.last_Monster_Position_Y;
             monster_Speed = m.monster_Speed;
+            this.last_Monster_Rect = last_Monster_Rect;
         }
 
-        public Monster_Token(int last_Monster_Position_X, int last_Monster_Position_Y, int monster_Speed)
+        public Monster_Token(int last_Monster_Position_X, int last_Monster_Position_Y, int monster_Speed, Rectangle last_Monster_Rect)
         {
             this.Last_Monster_Position_X = last_Monster_Position_X;
             this.Last_Monster_Position_Y = last_Monster_Position_Y;
             this.Monster_Speed = monster_Speed;
+            this.Last_Monster_Rect = last_Monster_Rect;
         }
 
         public int Last_Monster_Position_X { get => last_Monster_Position_X; set => last_Monster_Position_X = value; }
         public int Last_Monster_Position_Y { get => last_Monster_Position_Y; set => last_Monster_Position_Y = value; }
         public int Monster_Speed { get => monster_Speed; set => monster_Speed = value; }
+        public Rectangle Last_Monster_Rect { get => last_Monster_Rect; set => last_Monster_Rect = value; }
 
         public override bool Equals(object obj)
         {
             if (((Monster_Token)obj).last_Monster_Position_X == last_Monster_Position_X &&
                 ((Monster_Token)obj).last_Monster_Position_Y == last_Monster_Position_Y &&
-                ((Monster_Token)obj).monster_Speed == monster_Speed)
+                ((Monster_Token)obj).monster_Speed == monster_Speed &&
+                ((Monster_Token)obj).last_Monster_Rect == last_Monster_Rect)
                 return true;
             return false;
         }
@@ -78,6 +84,7 @@ namespace BattleMap
         //get last player position
         static int last_Player_Position_X = 0;
         static int last_Player_Position_Y = 0;
+        static Rectangle last_player_rect;
 
         public static List<Monster_Token> Monster_Positions1 { get => Monster_Positions; set => Monster_Positions = value; }
         public static List<Monster_Token> List_Last_Positions1 { get => List_Last_Positions; set => List_Last_Positions = value; }
@@ -130,6 +137,7 @@ namespace BattleMap
 
             last_Player_Position_X = x;
             last_Player_Position_Y = y;
+            last_player_rect = rect;
         }
 
         private void canvas_KeyDown(object sender, KeyEventArgs e)
@@ -138,16 +146,10 @@ namespace BattleMap
             {
                 if (y - 50 >= 0)
                 {
+                  
                     y -= 50;
 
-                    Rectangle r;
-                    r = new Rectangle();
-                    r.Fill = Brushes.White;
-                    r.Width = 50;
-                    r.Height = 50;
-                    Canvas.SetLeft(r, last_Player_Position_X);
-                    Canvas.SetTop(r, last_Player_Position_Y);
-                    canvas.Children.Add(r);
+                    canvas.Children.Remove(last_player_rect);
 
                     Rectangle rect;
                     rect = new Rectangle();
@@ -162,10 +164,12 @@ namespace BattleMap
 
                     last_Player_Position_X = x;
                     last_Player_Position_Y = y;
+                    last_player_rect = rect;
 
                     canvas.Focus();
                     ComboBox_Monster_List.Focusable = false;
                     Remove_Monster.Focusable = false;
+                   
                 }
             }
             else if (e.Key == Key.Down)
@@ -175,14 +179,7 @@ namespace BattleMap
                 {
                     y += 50;
 
-                    Rectangle r;
-                    r = new Rectangle();
-                    r.Fill = Brushes.White;
-                    r.Width = 50;
-                    r.Height = 50;
-                    Canvas.SetLeft(r, last_Player_Position_X);
-                    Canvas.SetTop(r, last_Player_Position_Y);
-                    canvas.Children.Add(r);
+                    canvas.Children.Remove(last_player_rect);
 
                     Rectangle rect;
                     rect = new Rectangle();
@@ -197,6 +194,7 @@ namespace BattleMap
 
                     last_Player_Position_X = x;
                     last_Player_Position_Y = y;
+                    last_player_rect = rect;
 
                     canvas.Focus();
                     ComboBox_Monster_List.Focusable = false;
@@ -210,14 +208,7 @@ namespace BattleMap
                 {
                     x -= 50;
 
-                    Rectangle r;
-                    r = new Rectangle();
-                    r.Fill = Brushes.White;
-                    r.Width = 50;
-                    r.Height = 50;
-                    Canvas.SetLeft(r, last_Player_Position_X);
-                    Canvas.SetTop(r, last_Player_Position_Y);
-                    canvas.Children.Add(r);
+                    canvas.Children.Remove(last_player_rect);
 
                     Rectangle rect;
                     rect = new Rectangle();
@@ -232,6 +223,7 @@ namespace BattleMap
 
                     last_Player_Position_X = x;
                     last_Player_Position_Y = y;
+                    last_player_rect = rect;
 
                     canvas.Focus();
                     ComboBox_Monster_List.Focusable = false;
@@ -245,14 +237,7 @@ namespace BattleMap
                 {
                     x += 50;
 
-                    Rectangle r;
-                    r = new Rectangle();
-                    r.Fill = Brushes.White;
-                    r.Width = 50;
-                    r.Height = 50;
-                    Canvas.SetLeft(r, last_Player_Position_X);
-                    Canvas.SetTop(r, last_Player_Position_Y);
-                    canvas.Children.Add(r);
+                    canvas.Children.Remove(last_player_rect);
 
                     Rectangle rect;
                     rect = new Rectangle();
@@ -267,6 +252,7 @@ namespace BattleMap
 
                     last_Player_Position_X = x;
                     last_Player_Position_Y = y;
+                    last_player_rect = rect;
 
                     canvas.Focus();
                     ComboBox_Monster_List.Focusable = false;
@@ -294,14 +280,7 @@ namespace BattleMap
                 int Y = rd.Next(0, Monster_Positions1[i].Monster_Speed);
                 int Plus_Minus = rd.Next(0, 2);
 
-                Rectangle r;
-                r = new Rectangle();
-                r.Fill = Brushes.White;
-                r.Width = 50;
-                r.Height = 50;
-                Canvas.SetLeft(r, Monster_Positions1[i].Last_Monster_Position_X);
-                Canvas.SetTop(r, Monster_Positions1[i].Last_Monster_Position_Y);
-                canvas.Children.Add(r);
+                canvas.Children.Remove(Monster_Positions1[i].Last_Monster_Rect);
 
                 // 0 = Plus | 1 = Minus
                 if (Plus_Minus == 0)
@@ -452,6 +431,7 @@ namespace BattleMap
 
                 Monster_Positions1[i].Last_Monster_Position_X = pX;
                 Monster_Positions1[i].Last_Monster_Position_Y = pY;
+                Monster_Positions1[i].Last_Monster_Rect = rect;
 
                 clicks++;
                 if (clicks == 10)
@@ -536,8 +516,8 @@ namespace BattleMap
                     int last_Monster_Position_X = Nx;
                     int last_Monster_Position_Y = Ny;
 
-                    Monster_Positions1.Add(new Monster_Token(last_Monster_Position_X, last_Monster_Position_Y, Speed));
-                    List_Last_Positions1.Add(new Monster_Token(last_Monster_Position_X, last_Monster_Position_Y, Speed));
+                    Monster_Positions1.Add(new Monster_Token(last_Monster_Position_X, last_Monster_Position_Y, Speed, rect));
+                    List_Last_Positions1.Add(new Monster_Token(last_Monster_Position_X, last_Monster_Position_Y, Speed, rect));
 
                     int pos = Monster_Positions1.Count() - 1;
                     ComboBox_Monster_List.Items.Add("Monster " + (pos + 1) + ":  X-> " + Monster_Positions1.ElementAt(Monster_Positions1.Count() - 1).Last_Monster_Position_X + " |  Y-> " + Monster_Positions1.ElementAt(Monster_Positions1.Count() - 1).Last_Monster_Position_Y);
@@ -566,8 +546,8 @@ namespace BattleMap
                     int Second_last_Monster_Position_X = Second_P_X;
                     int Second_last_Monster_Position_Y = Second_P_Y;
 
-                    Monster_Positions1.Add(new Monster_Token(Second_last_Monster_Position_X, Second_last_Monster_Position_Y, Speed));
-                    List_Last_Positions1.Add(new Monster_Token(Second_last_Monster_Position_X, Second_last_Monster_Position_Y, Speed));
+                    Monster_Positions1.Add(new Monster_Token(Second_last_Monster_Position_X, Second_last_Monster_Position_Y, Speed, rect));
+                    List_Last_Positions1.Add(new Monster_Token(Second_last_Monster_Position_X, Second_last_Monster_Position_Y, Speed, rect));
 
                     int pos = Monster_Positions1.Count() - 1;
                     ComboBox_Monster_List.Items.Add("Monster " + (pos + 1) + ":  X-> " + Monster_Positions1.ElementAt(Monster_Positions1.Count() - 1).Last_Monster_Position_X + " |  Y-> " + Monster_Positions1.ElementAt(Monster_Positions1.Count() - 1).Last_Monster_Position_Y);
@@ -588,14 +568,7 @@ namespace BattleMap
         {
             try
             {
-                Rectangle r;
-                r = new Rectangle();
-                r.Fill = Brushes.White;
-                r.Width = 50;
-                r.Height = 50;
-                Canvas.SetLeft(r, Monster_Positions1[ComboBox_Monster_List.SelectedIndex].Last_Monster_Position_X);
-                Canvas.SetTop(r, Monster_Positions1[ComboBox_Monster_List.SelectedIndex].Last_Monster_Position_Y);
-                canvas.Children.Add(r);
+                canvas.Children.Remove(Monster_Positions1[ComboBox_Monster_List.SelectedIndex].Last_Monster_Rect);
 
                 Monster_Positions1.RemoveAt(ComboBox_Monster_List.SelectedIndex);
                 ComboBox_Monster_List.Items.Remove(ComboBox_Monster_List.SelectedIndex);
